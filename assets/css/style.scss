@@ -68,12 +68,12 @@ body {
   background-clip: padding-box, border-box;
 }
 
-.eyebrow {
-  margin: 0 0 1rem;
-  font-size: 0.85rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--muted);
+.logo {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  margin: 0 auto 1.25rem;
 }
 
 .title {
