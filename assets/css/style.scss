@@ -126,3 +126,145 @@ body {
   color: var(--muted);
   font-size: 0.8rem;
 }
+
+/* ---------- Stick figure: runs in, does jumping jacks, runs off, every 30s ---------- */
+
+.actor {
+  position: fixed;
+  bottom: 50px;
+  left: 0;
+  pointer-events: none;
+  z-index: 5;
+  animation: actor-cross 30s linear infinite;
+}
+
+.actor__svg {
+  display: block;
+  overflow: visible;
+}
+
+.actor__head {
+  fill: none;
+  stroke: var(--caution-black);
+  stroke-width: 2;
+}
+
+.actor__body,
+.actor__arm,
+.actor__leg {
+  stroke: var(--caution-black);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.actor__body-group {
+  transform-box: view-box;
+  transform-origin: 0 78px;
+  animation: actor-bounce 30s linear infinite;
+}
+
+.actor__arm,
+.actor__leg {
+  transform-box: view-box;
+}
+
+.actor__arm--l { transform-origin: 0 22px; animation: arm-l 30s linear infinite; }
+.actor__arm--r { transform-origin: 0 22px; animation: arm-r 30s linear infinite; }
+.actor__leg--l { transform-origin: 0 48px; animation: leg-l 30s linear infinite; }
+.actor__leg--r { transform-origin: 0 48px; animation: leg-r 30s linear infinite; }
+
+/*
+  Timeline (30s cycle):
+    0%    - 83.3%  hidden off-screen left  (25s idle)
+    83.3% - 86.7%  run in from left        (1s)
+    86.7% - 96.7%  jumping jacks           (3s, ~4 reps)
+    96.7% - 100%   run off to the right    (1s)
+*/
+
+@keyframes actor-cross {
+  0%, 83.3% { transform: translateX(-100px); }
+  86.7%     { transform: translateX(calc(50vw - 30px)); }
+  96.7%     { transform: translateX(calc(50vw - 30px)); }
+  100%      { transform: translateX(calc(100vw + 30px)); }
+}
+
+@keyframes actor-bounce {
+  0%, 86.7%   { transform: translateY(0); }
+  88.0%       { transform: translateY(-8px); }
+  89.2%       { transform: translateY(0); }
+  90.4%       { transform: translateY(-8px); }
+  91.7%       { transform: translateY(0); }
+  92.9%       { transform: translateY(-8px); }
+  94.2%       { transform: translateY(0); }
+  95.4%       { transform: translateY(-8px); }
+  96.7%, 100% { transform: translateY(0); }
+}
+
+@keyframes arm-l {
+  0%, 86.7%   { transform: rotate(-20deg); }
+  88.0%       { transform: rotate(-160deg); }
+  89.2%       { transform: rotate(-20deg); }
+  90.4%       { transform: rotate(-160deg); }
+  91.7%       { transform: rotate(-20deg); }
+  92.9%       { transform: rotate(-160deg); }
+  94.2%       { transform: rotate(-20deg); }
+  95.4%       { transform: rotate(-160deg); }
+  96.7%, 100% { transform: rotate(-20deg); }
+}
+
+@keyframes arm-r {
+  0%, 86.7%   { transform: rotate(20deg); }
+  88.0%       { transform: rotate(160deg); }
+  89.2%       { transform: rotate(20deg); }
+  90.4%       { transform: rotate(160deg); }
+  91.7%       { transform: rotate(20deg); }
+  92.9%       { transform: rotate(160deg); }
+  94.2%       { transform: rotate(20deg); }
+  95.4%       { transform: rotate(160deg); }
+  96.7%, 100% { transform: rotate(20deg); }
+}
+
+@keyframes leg-l {
+  0%, 83.3%   { transform: rotate(-8deg); }
+  84.2%       { transform: rotate(-30deg); }
+  85.0%       { transform: rotate(20deg); }
+  85.8%       { transform: rotate(-30deg); }
+  86.7%       { transform: rotate(-8deg); }
+  88.0%       { transform: rotate(-30deg); }
+  89.2%       { transform: rotate(-8deg); }
+  90.4%       { transform: rotate(-30deg); }
+  91.7%       { transform: rotate(-8deg); }
+  92.9%       { transform: rotate(-30deg); }
+  94.2%       { transform: rotate(-8deg); }
+  95.4%       { transform: rotate(-30deg); }
+  96.7%       { transform: rotate(-8deg); }
+  97.5%       { transform: rotate(20deg); }
+  98.3%       { transform: rotate(-30deg); }
+  99.2%       { transform: rotate(20deg); }
+  100%        { transform: rotate(-8deg); }
+}
+
+@keyframes leg-r {
+  0%, 83.3%   { transform: rotate(8deg); }
+  84.2%       { transform: rotate(30deg); }
+  85.0%       { transform: rotate(-20deg); }
+  85.8%       { transform: rotate(30deg); }
+  86.7%       { transform: rotate(8deg); }
+  88.0%       { transform: rotate(30deg); }
+  89.2%       { transform: rotate(8deg); }
+  90.4%       { transform: rotate(30deg); }
+  91.7%       { transform: rotate(8deg); }
+  92.9%       { transform: rotate(30deg); }
+  94.2%       { transform: rotate(8deg); }
+  95.4%       { transform: rotate(30deg); }
+  96.7%       { transform: rotate(8deg); }
+  97.5%       { transform: rotate(-20deg); }
+  98.3%       { transform: rotate(30deg); }
+  99.2%       { transform: rotate(-20deg); }
+  100%        { transform: rotate(8deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .actor { display: none; }
+  .status { animation: none; }
+}
