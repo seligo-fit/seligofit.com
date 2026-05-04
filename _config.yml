@@ -1,0 +1,12 @@
+title: seligo.fit
+description: AI-assisted fitness, coming soon.
+url: https://seligofit.com
+
+markdown: kramdown
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+
+plugins: []
