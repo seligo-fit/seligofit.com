@@ -9,6 +9,8 @@
   --muted: #6b6b6b;
   --accent: #8a8a8a;
   --stripe: #ededed;
+  --caution-yellow: #f5c518;
+  --caution-black: #111111;
 }
 
 * { box-sizing: border-box; }
@@ -44,14 +46,26 @@ body {
 }
 
 .hero__inner {
+  position: relative;
   background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: 6px;
   padding: 3rem 2.5rem;
   max-width: 520px;
   width: 100%;
   text-align: center;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  border: 12px solid transparent;
+  background-image:
+    linear-gradient(var(--surface), var(--surface)),
+    repeating-linear-gradient(
+      45deg,
+      var(--caution-yellow) 0,
+      var(--caution-yellow) 16px,
+      var(--caution-black) 16px,
+      var(--caution-black) 32px
+    );
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
 }
 
 .eyebrow {
@@ -76,24 +90,27 @@ body {
   gap: 0.5rem;
   margin: 0 0 1.25rem;
   padding: 0.4rem 0.9rem;
-  border: 1px solid var(--border);
+  border: 1px solid var(--caution-black);
   border-radius: 999px;
   font-size: 0.85rem;
-  color: var(--muted);
-  background: var(--bg);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--caution-black);
+  background: var(--caution-yellow);
+  animation: flash 2.8s ease-in-out infinite;
 }
 
 .status__dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--accent);
-  animation: pulse 2s ease-in-out infinite;
+  background: var(--caution-black);
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
+@keyframes flash {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.55; }
 }
 
 .lede {
